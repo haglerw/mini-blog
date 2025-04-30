@@ -1,0 +1,9 @@
+{
+  "modes": [
+    {
+      "title": "Form",
+      "page": "pages/form/form",
+      "pageQuery": ""
+    }
+  ]
+}

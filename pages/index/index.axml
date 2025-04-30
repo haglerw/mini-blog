@@ -1,0 +1,51 @@
+<view class="list-container">
+  <view class="list-header">
+    <view class="list-title">Blog Posts</view>
+    <a-button
+      type="primary"
+      size="small"
+      class="add-btn"
+      onTap="goToAdd"
+    >
+      Add
+    </a-button>
+  </view>
+
+  <a-list>
+    <block a:for="{{ posts }}" a:key="id" a:for-item="item">
+
+      <a-list-item>
+        <view class="post-item">
+          <view class="post-title">{{ item.title }}</view>
+          <view class="post-body">{{item.body}}</view>
+        </view>
+      </a-list-item>
+
+      <a-container>
+        <a-button
+          type="primary"
+          size="small"
+          onTap="goToEdit"
+          data-id="{{item.id}}"
+          inline
+          class="action-btn"
+        >
+        Edit
+      </a-button>
+
+      <a-button
+        type="primary"
+        size="small"
+        onTap="handleDelete"
+        data-id="{{item.id}}"
+        danger
+        inline
+      >
+        Delete
+      </a-button>
+      </a-container>
+    </block>
+  </a-list>
+
+  
+</view>

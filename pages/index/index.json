@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "a-button": "antd-mini/es/Button/index",
+    "a-list": "antd-mini/es/List/index",
+    "a-list-item": "antd-mini/es/List/ListItem/index",
+    "a-input": "antd-mini/es/Input/index",
+    "a-container": "antd-mini/es/Container/index"
+  }
+}

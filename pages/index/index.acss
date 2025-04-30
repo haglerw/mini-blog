@@ -1,0 +1,45 @@
+.list-container {
+  padding: 24rpx;
+}
+
+.list-title {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.post-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.post-body {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.delete-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12rpx 24rpx;
+}
+
+.action-btn {
+  margin-right: 12rpx;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.add-btn {
+  padding: 0 35rpx;
+}

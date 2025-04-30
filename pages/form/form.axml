@@ -1,0 +1,41 @@
+<view class="form-container">
+  <view class="form-header">
+    <a-icon type="LeftOutline" size="20" onTap="goBack" />
+    <view class="form-title">{{ isEditing ? 'Edit Post' : 'Create New' }}</view>
+  </view>
+
+  <form onSubmit="handleSubmit">
+    <a-container>
+      <a-input
+        name="title"
+        placeholder="Enter Title"
+        value={{ form.title }}
+        onChange="handleTitleChange"
+        allowClear
+      />
+    </a-container>
+    <view class="error-text">{{ errors.title }}</view>
+  
+    <a-container>
+      <a-textarea
+        name="body"
+        placeholder="Enter body"
+        autoHeight
+        value="{{ form.body }}"
+        onChange="handleBodyChange"
+      >
+      </a-textarea>    
+    </a-container>
+    <view class="error-text">{{ errors.body }}</view>
+  
+    <a-button
+        type="primary"
+        size="small"
+        formType="submit"
+        className="form-actions"
+      >
+      Submit
+    </a-button>
+  </form>
+
+</view>
