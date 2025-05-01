@@ -1,7 +1,6 @@
 <view class="form-container">
   <view class="form-header">
-    <a-icon type="LeftOutline" size="20" onTap="goBack" />
-    <view class="form-title">{{ isEditing ? 'Edit Post' : 'Create New' }}</view>
+    <view class="form-title">{{ isEditing ? 'Edit Post' : 'New Post' }}</view>
   </view>
 
   <form onSubmit="handleSubmit">

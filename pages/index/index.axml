@@ -1,14 +1,7 @@
 <view class="list-container">
   <view class="list-header">
     <view class="list-title">Blog Posts</view>
-    <a-button
-      type="primary"
-      size="small"
-      class="add-btn"
-      onTap="goToAdd"
-    >
-      Add
-    </a-button>
+    <a-icon type="AddCircleOutline" style="color: purple; font-size: 50rpx" onTap="goToAdd" />
   </view>
 
   <a-list>
@@ -22,27 +15,8 @@
       </a-list-item>
 
       <a-container>
-        <a-button
-          type="primary"
-          size="small"
-          onTap="goToEdit"
-          data-id="{{item.id}}"
-          inline
-          class="action-btn"
-        >
-        Edit
-      </a-button>
-
-      <a-button
-        type="primary"
-        size="small"
-        onTap="handleDelete"
-        data-id="{{item.id}}"
-        danger
-        inline
-      >
-        Delete
-      </a-button>
+        <a-icon type="EditSOutline" style="color: purple; margin-right: 15rpx" onTap="goToEdit" data-id={{item.id}} />
+        <a-icon type="DeleteOutline" style="color: red" onTap="handleDelete" data-id={{item.id}} />
       </a-container>
     </block>
   </a-list>

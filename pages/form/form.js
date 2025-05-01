@@ -1,4 +1,9 @@
 import resourceRequest from "/utils/api";
+import {
+  getCachedPosts,
+  addPost,
+  updatePost
+} from "/utils/postCache";
 
 Page({
   data: {
@@ -44,22 +49,38 @@ Page({
   },
 
   getPost(id) {
-    resourceRequest({
-      url: `https://jsonplaceholder.typicode.com/posts/${id}`,
-      success: (res) => {
-        this.setData({
-          form: {
-            title: res.data.title,
-            body: res.data.body
-          },
-          userId: res.data.userId
-        })
-      }
-    })
-  },
+    const cachedPosts = getCachedPosts();
+    const found = cachedPosts.find(post => post.id == id);
 
-  goBack() {
-    my.navigateBack();
+    if (found) {
+      this.setData({
+        form: {
+          title: found.title,
+          body: found.body
+        },
+        userId: found.userId
+      });
+    } else {
+      resourceRequest({
+        url: `https://jsonplaceholder.typicode.com/posts/${id}`,
+        success: (res) => {
+          this.setData({
+            form: {
+              title: res.data.title,
+              body: res.data.body
+            },
+            userId: res.data.userId
+          })
+        },
+        fail: () => {
+          my.showToast({
+            type: 'fail',
+            content: 'Post not found',
+            duration: 2000
+          });
+        }
+      })
+    }
   },
 
   handleSubmit(e) {
@@ -88,8 +109,9 @@ Page({
       resourceRequest({
         url: `https://jsonplaceholder.typicode.com/posts/${id}`,
         method: 'PUT',
-        data: { title, body, userId: this.data.userId },
+        data: { id, title, body, userId: this.data.userId },
         success: () => {
+          updatePost(id, { title, body });
           my.showToast({
             type: 'success',
             content: 'Post updated.',
@@ -104,6 +126,14 @@ Page({
         method: 'POST',
         data: { title, body, userId: randomNumber },
         success: () => {
+          const newPost = {
+            id: Math.floor(Math.random() * 10000),
+            title,
+            body,
+            userId: randomNumber
+          };
+          addPost(newPost);
+
           my.showToast({
             type: 'success',
             content: 'Post created.',

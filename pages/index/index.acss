@@ -3,7 +3,7 @@
 }
 
 .list-title {
-  font-size: 32rpx;
+  font-size: 36rpx;
   font-weight: bold;
 }
 
@@ -16,17 +16,12 @@
   font-size: 32rpx;
   font-weight: 600;
   margin-bottom: 8rpx;
+  color: purple;
 }
 
 .post-body {
   font-size: 28rpx;
   color: #666;
-}
-
-.delete-button-container {
-  display: flex;
-  justify-content: flex-end;
-  padding: 12rpx 24rpx;
 }
 
 .action-btn {

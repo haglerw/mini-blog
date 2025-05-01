@@ -6,6 +6,5 @@
     "a-container": "antd-mini/es/Container/index",
     "a-icon": "antd-mini/es/Icon/index"
   },
-  "styleIsolation": "apply-shared",
-  "defaultTitle": "New Post"
+  "styleIsolation": "apply-shared"
 }

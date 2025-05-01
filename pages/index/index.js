@@ -1,35 +1,46 @@
 import resourceRequest from "/utils/api";
+import {
+  getCachedPosts,
+  setCachedPosts,
+  deletePost
+} from "/utils/postCache";
 
 Page({
   data: {
     posts: [],
   },
-  onLoad(query) {
-    this.fetchPosts();
+  onLoad() {
+    const cached = getCachedPosts();
+    this.setData({ posts: cached });
   },
   onReady() {
-    // 页面加载完成
+    this.fetchPosts();
   },
   onShow() {
-    // 页面显示
-  },
-  onHide() {
-    // 页面隐藏
-  },
-  onUnload() {
-    // 页面被关闭
-  },
-  onTitleClick() {
-    // 标题被点击
+    const updated = getCachedPosts();
+    this.setData({ posts: updated });
   },
   onPullDownRefresh() {
-    // 页面被下拉
+    this.fetchPosts(() => {
+      my.stopPullDownRefresh();
+    });
   },
-  fetchPosts() {
+  fetchPosts(callback) {
     resourceRequest({
       url: 'https://jsonplaceholder.typicode.com/posts',
       success: ({ data: resData }) => {
-        this.setData({ posts: resData.slice(0, 20) })
+        const paged = resData.slice(0, 20);
+        this.setData({ posts: paged });
+        setCachedPosts(paged);
+        if (callback) callback();
+      },
+      fail: () => {
+        my.showToast({
+          type: 'fail',
+          content: 'Failed to fetch posts',
+          duration: 2000
+        });
+        if (callback) callback();
       }
     })
   },
@@ -46,6 +57,7 @@ Page({
   },
   handleDelete(e) {
     const postId = e.target.dataset.id;
+    
     my.confirm({
       title: 'Confirm',
       content: 'Are you sure you want to delete this post?',
@@ -60,7 +72,8 @@ Page({
                 content: 'Post deleted.',
                 duration: 2000
               });
-              this.fetchPosts(); // Needs improvement - use caching
+              const updated = deletePost(postId);
+              this.setData({ posts: updated });
             }
           })
         }
